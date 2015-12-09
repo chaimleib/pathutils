@@ -1,0 +1,7 @@
+curdir='.'
+pardir='..'
+extsep='.'
+sep='/'
+pathsep=':'
+defpath=':/bin:/usr/bin'
+devnull='/dev/null'
