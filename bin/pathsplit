@@ -1,0 +1,20 @@
+#!/bin/bash
+
+path="$1"
+
+tail="${path##*/}"
+head="${path%$tail}" 
+
+
+function repeatstr() {
+    str="$1"
+    times="$2"
+    eval printf "$str%.0s" {1.."$times"}
+}
+
+if [[ -n "$head" && "$head" != "$(repeatstr / "${#head}")" ]]; then
+    head="${head%/}"
+fi
+
+echo "$head"
+echo "$tail"
