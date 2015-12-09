@@ -3,6 +3,7 @@
 A set of bash scripts providing useful tools to manipulate paths.
 
 Goals:
+* Provide useful path tools not native to bash
 * Cross-platform
 * Simple to install
 
