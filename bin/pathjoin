@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# . "$(dirname "$0")/../lib/vars.sh"
+
+base="$1"
+subs=("${@:2}")
+
+rv="$base"
+for ((i = 0; i < ${#subs[@]}; i++)); do
+    sub="${subs[$i]}"
+    if [[ "${sub:0:1}" == "/" ]]; then
+        rv="$sub"
+    elif [[ -z "$rv" ]] || [[ ${rv:(-1)} == "/" ]]; then
+        rv+="$sub"
+    else
+        rv+="/$sub"
+    fi
+done
+echo "$rv"

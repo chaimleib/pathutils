@@ -1,5 +1,5 @@
 #!/bin/bash
 
-. "$(dirname "$0")/../lib/vars.sh"
+# . "$(dirname "$0")/../lib/vars.sh"
 
-test "${1:0:1}" == "${sep}"
+test "${1:0:1}" == "/"
