@@ -1,0 +1,27 @@
+#!/bin/bash
+
+[[ -h "$1" ]] && exit 1
+[[ -d "$1" ]] || exit 1
+
+case "$OSTYPE" in
+    darwin*) statopts='-f %i:%d' ;;
+    # linux*) statopts='--format %i:%d' ;;
+    # cygwin*) statopts='--format %i:%d' ;;
+    *) statopts='--format %i:%d' ;;
+esac
+
+my_dir="$(dirname "$0")"
+file_parent="$("${my_dir}/joinpath" "$1/..")"
+
+stat1="$(stat $statopts "$1" 2>/dev/null)"
+[[ "$?" != "0" ]] && exit $?
+stat2="$(stat $statopts "$file_parent" 2>/dev/null)"
+[[ "$?" != "0" ]] && exit $?
+
+dev1="$(echo "$stat1" | cut -d: -f2)"
+dev2="$(echo "$stat2" | cut -d: -f2)"
+[[ "${dev1}" != "${dev2}" ]] && exit 0
+
+ino1="$(echo "$stat1" | cut -d: -f1)"
+ino2="$(echo "$stat2" | cut -d: -f1)"
+[[ "${ino1}" == "${ino2}" ]]
