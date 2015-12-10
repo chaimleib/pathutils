@@ -1,0 +1,1 @@
+pathisabs /hello/world
