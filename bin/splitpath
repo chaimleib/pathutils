@@ -5,10 +5,9 @@ path="$1"
 tail="${path##*/}"
 head="${path%$tail}" 
 
-
 function repeatstr() {
-    str="$1"
-    times="$2"
+    local str="$1"
+    local times="$2"
     eval printf "$str%.0s" {1.."$times"}
 }
 
