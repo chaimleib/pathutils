@@ -1,1 +1,1 @@
-test "$(normpath "./")" == "."
+test "$(normpath ".")" == "."
