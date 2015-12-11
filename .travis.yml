@@ -1,9 +1,6 @@
 language: bash
-python:
-    - "2.6"
-    - "2.7"
-    - "3.2"
-    - "3.3"
-    - "3.4"
+os::
+  - linux
+  - osx
 script:
     test/runalltests.sh
