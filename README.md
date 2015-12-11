@@ -17,6 +17,7 @@ These are ported to bash from the Python source for the [posixpath module][] and
 * `samestat path1 path2` - whether two paths have the inode and device id. Slightly faster than samefile. Also return status only.
 * `splitpath path` - output `path`'s parent directory on the first line and its final element on the second line.
 * `splitext path` - output everything until `path`'s last extension on the first line, and its extension on the second line.
+* `normpath path` - cleanup `path` from repeated slashes, resolve double and single dots, etc.
 
 ## Not provided
 Some functions provided by Python's [posixpath module][] were left out, as their functions come standard with bash.
