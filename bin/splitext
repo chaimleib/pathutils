@@ -1,0 +1,31 @@
+#!/bin/bash
+
+p="$1"
+sep="${2-/}"
+altsep="${3}"
+extsep="${4-.}"
+
+[[ "$p" == *"$sep"* ]] && until_sep="${p%"$sep"*}" || until_sep=""
+
+if [ -n "$altsep" ]; then
+    [[ "$p" == *"$altsep"* ]] && until_altsep="${p%"$altsep"*}" || until_altsep=""
+    [[ ${#until_altsep} -ge ${#until_sep} ]] && until_sep="$until_altsep"
+fi
+
+until_dot="${p%"$extsep"*}"
+
+if [[ ${#until_dot} -gt ${#until_sep} ]]; then
+    # skip all leading dots
+    filename_index=${#until_sep}; ((filename_index++))
+    while [[ ${filename_index} -lt ${#until_dot} ]]; do
+        if [[ "${p[$filename_index]}" != "$extsep" ]]; then
+            echo "$until_dot"
+            echo "${p:${#until_dot}}"
+            exit 0
+        fi
+        ((filename_index++))
+    done
+fi
+
+echo "$p"
+printf '\n'
