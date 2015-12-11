@@ -17,6 +17,7 @@ function joinstr() {
     local sep="$1"
     local args=("$@")
     local num_args=${#@}
+    [[ $num_args -eq 1 ]] && printf '\n' && return 0
     local i=1
     while [[ $i -lt $((num_args-1)) ]]; do
         printf %s"$sep" "${args[$i]}"
@@ -50,13 +51,14 @@ while IFS= read -r; do comps+=("$REPLY"); done < <(splitstr "$path" /)
 
 for comp in "${comps[@]}"; do    
     [[ -z "$comp" || "$comp" == "." ]] && continue
+    num_new_comps=${#new_comps[@]}
     if [[ "$comp" != ".." ]] ||
-        [[ $initial_slashes -eq 0 && ${#new_comps[@]} -eq 0 ]] ||
-        [[ ${#new_comps} -ne 0 && "${new_comps[${#new_comps}-1]}" != ".." ]]
+        [[ $initial_slashes -eq 0 && $num_new_comps -eq 0 ]] ||
+        [[ $num_new_comps -ne 0 && "${new_comps[$num_new_comps-1]}" == ".." ]]
     then
         new_comps+=("$comp")
-    elif [[ ${#new_comps[@]} -ne 0 ]]; then
-        unset new_comps[${#new_comps[@]}-1]
+    elif [[ $num_new_comps -ne 0 ]]; then
+        unset new_comps[$num_new_comps-1]
     fi
 done
 
