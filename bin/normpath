@@ -65,4 +65,4 @@ done
 path="$(joinstr / "${new_comps[@]}")"
 [[ $initial_slashes -ne 0 ]] && path="$(repeatstr / $initial_slashes)$path"
 
-[[ -z path ]] && echo '.' || echo "$path"
+[[ -z "$path" ]] && echo '.' || echo "$path"
