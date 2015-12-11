@@ -5,7 +5,7 @@ case "$OSTYPE" in
     darwin*) statopts='-f%i:%d' ;;
     # linux*) statopts='--format %i:%d' ;;
     # cygwin*) statopts='--format %i:%d' ;;
-    *) '--format %i:%d' ;;
+    *) statopts='--format %i:%d' ;;
 esac
 
 test "$(stat $statopts "$1")" == "$(stat $statopts "$2")"
