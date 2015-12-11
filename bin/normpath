@@ -51,7 +51,8 @@ while IFS= read -r; do comps+=("$REPLY"); done < <(splitstr "$path" /)
 for comp in "${comps[@]}"; do    
     [[ -z "$comp" || "$comp" == "." ]] && continue
     if [[ "$comp" != ".." ]] ||
-        [[ $initial_slashes -eq 0 && ${#new_comps[@]} -eq 0 ]]
+        [[ $initial_slashes -eq 0 && ${#new_comps[@]} -eq 0 ]] ||
+        [[ ${#new_comps} -ne 0 && "${new_comps[${#new_comps}-1]}" != ".." ]]
     then
         new_comps+=("$comp")
     elif [[ ${#new_comps[@]} -ne 0 ]]; then
