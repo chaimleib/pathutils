@@ -3,6 +3,8 @@ path="$1"
 
 [[ -z "$path" ]] && echo '.' && exit 0
 
+function debug() { echo "$1 => \"$(eval echo \$$1)\"" >&2; }
+
 function startswith() {
     local prefix="$1"
     local str="$2"
@@ -30,10 +32,17 @@ function repeatstr() {
 }
 
 function splitstr() {
+    local str="$1"
     local delim="$2"
-    local result
-    IFS="$delim" read -ra result < <(echo "$1")
-    for s in "${result[@]}"; do echo "$s"; done
+    if [[ -z "$delim" ]]; then
+        echo "splitstr: no delimiter provided" >&2
+        return 1
+    fi
+    while [[ "$str" == *"$delim"* ]]; do
+        echo "${str%%"${delim}"*}"
+        str="${str#*"${delim}"}"
+    done
+    echo "$str"
 }
 
 # POSIX allows one or two initial slashes, but treats three or more
@@ -42,24 +51,20 @@ initial_slashes=0
 startswith / "$path" && initial_slashes=1
 startswith // "$path" && ! startswith /// "$path" && initial_slashes=2
 
-new_comps=()
-comps=()
-while IFS= read -r; do comps+=("$REPLY"); done < <(splitstr "$path" /)
-
-for comp in "${comps[@]}"; do    
+result=""
+while read -r comp; do
     [[ -z "$comp" || "$comp" == "." ]] && continue
-    num_new_comps=${#new_comps[@]}
     if [[ "$comp" != ".." ]] ||
-        [[ $initial_slashes -eq 0 && $num_new_comps -eq 0 ]] ||
-        [[ $num_new_comps -ne 0 && "${new_comps[$num_new_comps-1]}" == ".." ]]
+        [[ $initial_slashes -eq 0 && -z "$result" ]] ||
+        [[ "$result" == ".." || "$result" == *"/.." ]]
     then
-        new_comps+=("$comp")
-    elif [[ $num_new_comps -ne 0 ]]; then
-        unset new_comps[$num_new_comps-1]
+        [[ -n "$result" ]] && result+="/"
+        result+="$comp"
+    elif [[ -n "$result" ]]; then
+        [[ "$result" == */* ]] && result="${result%/*}" || result=""
     fi
-done
+done <<< "$(splitstr "$path" /)"
 
-path="$(joinstr / "${new_comps[@]}")"
-[[ $initial_slashes -ne 0 ]] && path="$(repeatstr / $initial_slashes)$path"
-
-[[ -z "$path" ]] && echo '.' || echo "$path"
+result="$(repeatstr / $initial_slashes)${result}"
+[[ -z "$result" ]] && result="."
+echo "$result"
