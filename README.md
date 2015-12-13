@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/chaimleib/pathutils.svg?branch=master)](https://travis-ci.org/chaimleib/pathutils)
+
 # pathutils
 
 A set of bash scripts providing useful tools to manipulate paths.
