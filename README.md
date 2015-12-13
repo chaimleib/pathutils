@@ -2,12 +2,13 @@
 
 # pathutils
 
-A set of bash scripts providing useful tools to manipulate paths.
+A set of bash tools for manipulate paths.
 
 Goals:
-* Provide useful path tools not native to bash
-* Cross-platform
-* Simple to install
+* Provide tools not included with bash
+* Simple to install; no compilers needed!
+* Support bash v3 and v4
+* Support for OS X, Ubuntu and Cygwin
 
 ## Provided tools
 These are ported to bash from the Python source for the [posixpath module][] and have the same behavior.
@@ -29,5 +30,13 @@ Some functions provided by Python's [posixpath module][] were left out, as their
 * islink - use `[ -h path ]`
 * lexists - use `[ -e path ]`
 * walk - use `find`
+
+# Testing
+
+Automated testing is performed via Travis CI on Ubuntu 12.04 LTS/bash 4.2.25.
+Development and frequent manual testing is under OS X El Capitan 10.11.2/bash 3.2.57.
+More occasional manual testing is under Windows 10/Cygwin/bash 4.3.42.
+
+To run the tests, execute `test/runalltests.sh`.
 
 [posixpath module]: http://svn.python.org/projects/python/branches/release27-maint/Lib/posixpath.py
