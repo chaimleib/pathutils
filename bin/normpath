@@ -38,11 +38,10 @@ function splitstr() {
         echo "splitstr: no delimiter provided" >&2
         return 1
     fi
-    while [[ "$str" == *"$delim"* ]]; do
-        echo "${str%%"${delim}"*}"
-        str="${str#*"${delim}"}"
+    IFS="$delim" read -ra parts <<< "$str"
+    for part in "${parts[@]}"; do
+        echo "$part"
     done
-    echo "$str"
 }
 
 # POSIX allows one or two initial slashes, but treats three or more
