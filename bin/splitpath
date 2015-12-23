@@ -1,15 +1,10 @@
 #!/bin/bash
 
 path="$1"
+my_dir="$(dirname "$0")"; . "${my_dir}/../lib/lib.sh"
 
 tail="${path##*/}"
 head="${path%$tail}" 
-
-function repeatstr() {
-    local str="$1"
-    local times="$2"
-    eval printf "$str%.0s" {1.."$times"}
-}
 
 if [[ -n "$head" && "$head" != "$(repeatstr / "${#head}")" ]]; then
     head="${head%/}"
@@ -17,3 +12,4 @@ fi
 
 echo "$head"
 echo "$tail"
+

@@ -22,7 +22,7 @@ function joinstr() {
 function repeatstr() {
     local str="$1"
     local num=${2-0}
-    [[ $num -gt 0 ]] && printf "$str"%.s $(eval echo {1..$num})
+    while ((num--)); do printf "$str"; done
     printf '\n'
 }
 
