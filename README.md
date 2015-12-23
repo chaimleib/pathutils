@@ -21,6 +21,7 @@ These are ported to bash from the Python source for the [posixpath module][] and
 * `splitpath path` - output `path`'s parent directory on the first line and its final element on the second line.
 * `splitext path` - output everything until `path`'s last extension on the first line, and its extension on the second line.
 * `normpath path` - cleanup `path` from repeated slashes, resolve double and single dots, etc.
+* `expanduser path` - spell out the user part of the path in full
 
 ## Not provided
 Some functions provided by Python's [posixpath module][] were left out, as their functions come standard with bash.
