@@ -10,7 +10,8 @@ fi
 
 userpart=${path%%\/*}
 rest="${path#"$userpart"}"
-userhome="$(eval echo $(echo "$userpart"))"
+eval userhome="$(printf %q "$userpart")"
 userhome="${userhome%/}"
 
 echo "${userhome}${rest}"
+
