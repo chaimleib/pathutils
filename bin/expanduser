@@ -1,0 +1,16 @@
+#!/bin/bash
+path="$1"
+
+my_dir="$(dirname "$0")"; . "$my_dir"/../libexec/lib.sh
+
+if ! startswith '~' "$path"; then
+	echo "$path"
+	exit 0
+fi
+
+userpart=${path%%\/*}
+rest="${path#"$userpart"}"
+userhome="$(eval echo $(echo "$userpart"))"
+userhome="${userhome%/}"
+
+echo "${userhome}${rest}"

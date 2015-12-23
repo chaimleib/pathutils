@@ -1,0 +1,3 @@
+result="$(expanduser '~')"
+[[ "$result" == ~ ]] &&
+	[[ "$result" != "~" ]]
