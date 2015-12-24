@@ -2,7 +2,7 @@
 [ -h "$1" ] && exit 1
 [ -d "$1" ] || exit 1
 
-if stat --help | grep GNU 1>/dev/null 2>/dev/null; then
+if stat --help 2>/dev/null | grep GNU 1>/dev/null 2>/dev/null; then
     # stat is from GNU coreutils
     statopts='--format %i:%d'
 else
