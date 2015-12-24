@@ -1,35 +1,34 @@
-function debug() { echo "$1 => \"$(eval echo \$$1)\"" >&2; }
+debug() { echo "$1 => \"$(eval echo \$$1)\"" >&2; }
 
-function startswith() {
+startswith() {
     local prefix="$1"
     local str="$2"
-    [[ "$str" == "$prefix"* ]]
+    [ "`echo "$str" | head -c"${#prefix}"`" = "$prefix" ]
 }
 
-function joinstr() {
-    local sep="$1"
-    local args=("$@")
-    local num_args=${#@}
-    [[ $num_args -eq 1 ]] && printf '\n' && return 0
+joinstr() {
+    local sep="`shift`"
+    local num_args=$#
+    [ $num_args -eq 0 ] && printf '\n' && return 0
     local i=1
-    while [[ $i -lt $((num_args-1)) ]]; do
-        printf %s"$sep" "${args[$i]}"
-        ((i++))
+    while [ $i -lt $((num_args)) ]; do
+        printf %s"$sep" "`shift`"
+        $((i=i+1))
     done
-    echo "${args[$num_args-1]}"
+    echo "`shift`"
 }
 
-function repeatstr() {
+repeatstr() {
     local str="$1"
     local num=${2-0}
     while ((num--)); do printf "$str"; done
     printf '\n'
 }
 
-function splitstr() {
+splitstr() {
     local str="$1"
     local delim="$2"
-    if [[ -z "$delim" ]]; then
+    if [ -z "$delim" ]; then
         echo "splitstr: no delimiter provided" >&2
         return 1
     fi

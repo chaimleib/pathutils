@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env dash
 path="$1"
-my_dir="$(dirname "$0")"
+my_dir="`dirname "$0"`"
 
 if ! "${my_dir}/isabspath" "$path"; then
-    path="$("${my_dir}/joinpath" "$PWD" "$path")"
+    path="`"${my_dir}/joinpath" "$PWD" "$path"`"
 fi
 
 "${my_dir}/normpath" "$path"

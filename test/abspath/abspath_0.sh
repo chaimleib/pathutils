@@ -1,2 +1,2 @@
-result="$(abspath /)"
+result="$(abspath '/')"
 [[ "$result" == "/" ]]
