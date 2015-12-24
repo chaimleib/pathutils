@@ -247,10 +247,10 @@ function lssys() {
     [[ -n $ram ]]               && machine_info="${machine_info}\n  ${ram} RAM"
     [[ -n $os_arch ]]           && machine_info="${machine_info}\n  ${os_arch} architecture"
     
-    machine_info="${machine_info}\nbash: $(bash --version)"
-    machine_info="${machine_info}\nsh: $(bash --version)"
+    machine_info="${machine_info}\nbash: $(bash --version | head -n1)"
+    machine_info="${machine_info}\nsh: $(bash --version | head -n1)"
 
-    [[ -n "$cpu_info" ]]        && echo "This machine:${machine_info}"
+    [[ -n "$cpu_info" ]]        && printf "This machine:${machine_info}\n"
 }
 
 
