@@ -1,3 +1,2 @@
-#!/bin/bash
-
-test "${1:0:1}" == "/"
+#!/usr/bin/env sh
+[ "`echo ${1} | head -c1`" = "/" ]
