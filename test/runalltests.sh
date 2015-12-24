@@ -1,11 +1,13 @@
 #!/bin/bash
 
 my_dir="$(dirname $0)"
+. "$my_dir"/../lib/lssys.sh
 PATH="$my_dir/../bin:$PATH"
 failed=0
 total=0
 
 function runalltests() {
+    lssys
     for dir in "$my_dir/"*; do
         [[ -d "$dir" ]] && runsubtests "$dir"
     done
