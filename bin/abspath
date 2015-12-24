@@ -1,4 +1,4 @@
-#!/usr/bin/env dash
+#!/usr/bin/env sh
 path="$1"
 my_dir="`dirname "$0"`"
 
