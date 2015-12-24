@@ -17,16 +17,18 @@ rest="${path#"$userpart"}"
 
 # We're calling to outside tools to avoid using eval. With eval, we might use
 #   userhome="$(eval echo "$userpart")"
-# but the above is insecure, since commands could be empedded in $userpart.
+# but the above is insecure, since commands could be embedded in $userpart.
 # In bash, we would use
 #   eval userhome="$(printf %q "$userpart")"
 # but in POSIX, we don't have a way to escape strings as with printf %q.
-# This would also work, but is insecure:
+
+# First, we see if we have the OSX command dscl
 if type dscl 1>/dev/null 2>/dev/null; then
     userhome="`
         dscl . read /users/${username} 2>/dev/null |
         perl -ne 'if (/^NFSHomeDirectory: (.+)$/) { print $1 . "\n" }'
         `"
+# Then, try using getent, present on Linux and Solaris:
 else
     userhome="`getent passwd "$username" 2>/dev/null | cut -d: -f6`"
 fi

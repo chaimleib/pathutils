@@ -2,16 +2,19 @@
 
 # pathutils
 
-A set of bash tools for manipulate paths.
+A set of shell tools for manipulating paths.
 
 Goals:
-* Provide tools not included with bash
+* Provide tools to ease use of the Bourne shell
+* Cross-platform:
+  * Support for dash (Bourne shell) and bash v3 and v4
+  * Support for OS X, Ubuntu and Cygwin
 * Simple to install; no compilers needed!
-* Support bash v3 and v4
-* Support for OS X, Ubuntu and Cygwin
+* Security (avoidance of `eval`)
+* Minimal dependence on external tools
 
 ## Provided tools
-These are ported to bash from the Python source for the [posixpath module][] and have the same behavior.
+These are ported to the Bourne shell from the Python source for the [posixpath module][]. They should have the same behavior, please tell me if there is any difference.
 
 * `isabspath path` - whether `path` is an absolute path. No output; use its return status instead.
 * `ismount path` - whether `path` is a mountpoint for some volume. Also no output; use its return status.
@@ -25,7 +28,7 @@ These are ported to bash from the Python source for the [posixpath module][] and
 * `abspath path` - convert given path to absolute path
 
 ## Not provided
-Some functions provided by Python's [posixpath module][] were left out, as their functions come standard with bash.
+Some functions provided by Python's [posixpath module][] were left out, as their functions come standard with the Bourne shell and its derivatives.
 
 * basename
 * dirname
