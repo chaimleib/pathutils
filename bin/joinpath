@@ -1,17 +1,13 @@
-#!/bin/bash
-
-base="$1"
-subs=("${@:2}")
-
-rv="$base"
-for ((i = 0; i < ${#subs[@]}; i++)); do
-    sub="${subs[$i]}"
-    if [[ "${sub:0:1}" == "/" ]]; then
+#!/usr/bin/env sh
+rv="$1"
+shift
+for sub in "$@"; do
+    if [ "`echo "$sub" | head -c1`" = "/" ]; then
         rv="$sub"
-    elif [[ -z "$rv" || ${rv:(-1)} == "/" ]]; then
-        rv+="$sub"
+    elif [ -z "$rv" ] || [ "`echo "$rv" | xargs | tail -c2`" = "/" ]; then
+        rv="$rv$sub"
     else
-        rv+="/$sub"
+        rv="$rv/$sub"
     fi
 done
 echo "$rv"
