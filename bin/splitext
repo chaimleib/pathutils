@@ -1,31 +1,39 @@
-#!/bin/bash
+#!/usr/bin/env sh
+my_dir="`dirname "$0"`"; . "$my_dir"/../lib/lib.sh
 
 p="$1"
 sep="${2-/}"
 altsep="${3}"
 extsep="${4-.}"
 
-[[ "$p" == *"$sep"* ]] && until_sep="${p%"$sep"*}" || until_sep=""
+until_sep="${p%"$sep"*}"
+[ "$until_sep" = "$p" ] && until_sep=""
 
 if [ -n "$altsep" ]; then
-    [[ "$p" == *"$altsep"* ]] && until_altsep="${p%"$altsep"*}" || until_altsep=""
-    [[ ${#until_altsep} -ge ${#until_sep} ]] && until_sep="$until_altsep"
+    until_altsep="${p%"$altsep"*}"
+    [ "$until_altsep" = "$p" ] && until_altsep=""
+    [ ${#until_altsep} -ge ${#until_sep} ] && until_sep="$until_altsep"
 fi
 
 until_dot="${p%"$extsep"*}"
+[ "$until_dot" = "$p" ] && until_dot="$p"
 
-if [[ ${#until_dot} -gt ${#until_sep} ]]; then
+if [ ${#until_dot} -gt ${#until_sep} ]; then
     # skip all leading dots
-    filename_index=${#until_sep}; ((filename_index++))
-    while [[ ${filename_index} -lt ${#until_dot} ]]; do
-        if [[ "${p[$filename_index]}" != "$extsep" ]]; then
+    filename="${p#"$until_sep"}"
+    filename_index=${#until_sep};
+    filename_index=$((filename_index+1))
+    while [ ${filename_index} -lt ${#until_dot} ]; do
+        if ! [ "`echo "$filename" | head -c1`" = "$extsep" ]; then
             echo "$until_dot"
-            echo "${p:${#until_dot}}"
+            echo "${p#"$until_dot"}"
             exit 0
         fi
-        ((filename_index++))
+        filename="${filename#"$extsep"}"
+        filename_index=$((filename_index+1))
     done
 fi
 
+debug p
 echo "$p"
 printf '\n'
