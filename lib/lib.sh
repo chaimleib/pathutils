@@ -13,7 +13,7 @@ joinstr() {
     local i=1
     while [ $i -lt $((num_args)) ]; do
         printf %s"$sep" "`shift`"
-        $((i=i+1))
+        i=$((i+1))
     done
     echo "`shift`"
 }
@@ -31,7 +31,7 @@ repeatstr() {
 
 splitstr() {
     rest="$1"
-    delim="${2?splitstr: no delimiter provided}"
+    delim="${2:?splitstr: no delimiter provided}"
     while [ -n "$rest" ]; do
         cur="${rest%%$delim*}"
         printf "$cur\n"
