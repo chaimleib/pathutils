@@ -1,4 +1,4 @@
-#/bin/bash
+#/usr/bin/env bash
 # need bash to use $OSTYPE
 
 # Shows the machine type and OS.
