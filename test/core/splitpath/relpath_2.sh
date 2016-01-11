@@ -1,4 +1,4 @@
-result="`splitext hello/world`"
+result="`splitpath hello/world`"
 head="`echo "$result" | head -n1`"
 tail="`echo "$result" | tail -n1`"
 
