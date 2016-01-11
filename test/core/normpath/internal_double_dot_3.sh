@@ -1,1 +1,1 @@
-test "$(normpath hello/world/../../test)" == "test"
+[ "`normpath hello/world/../../test`" = "test" ]
