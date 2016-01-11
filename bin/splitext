@@ -34,6 +34,5 @@ if [ ${#until_dot} -gt ${#until_sep} ]; then
     done
 fi
 
-debug p
 echo "$p"
 printf '\n'
