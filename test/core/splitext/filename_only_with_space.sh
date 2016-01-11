@@ -1,6 +1,5 @@
-result="`splitext hello\ world`"
-head="`echo "$result" | head -n1`"
-tail="`echo "$result" | tail -n1`"
+splitext hello\ world | (
+    read head; read tail
+    [ "$head" = "hello world" ] && [ "$tail" = "" ]
+)
 
-[ "$head" = "hello world" ] &&
-    [ "$tail" = "" ]
