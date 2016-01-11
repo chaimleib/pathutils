@@ -3,7 +3,7 @@ my_dir="$(dirname $0)"
 . "$my_dir"/testcommon.sh
 PATH="$my_dir/../bin:$PATH"
 
-function runcoretests() {
+runcoretests() {
     lssys
     printf '\n'
 

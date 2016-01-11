@@ -4,7 +4,7 @@ my_dir="$(dirname $0)"
 . "$my_dir"/../lib/lib.sh
 PATH="$my_dir/../bin:$PATH"
 
-function runlibtests() {
+runlibtests() {
     lssys
     printf '\n'
 
