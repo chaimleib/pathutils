@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 # my_dir="$(dirname $0)"
 . "$my_dir"/../lib/lssys.sh
 
