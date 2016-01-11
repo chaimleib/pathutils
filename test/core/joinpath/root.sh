@@ -1,1 +1,1 @@
-test "$(joinpath / hello world)" == "/hello/world"
+[ "`joinpath / hello world`" = "/hello/world" ]
