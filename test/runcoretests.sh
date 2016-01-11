@@ -4,7 +4,7 @@ my_dir="$(dirname $0)"
 PATH="$my_dir/../bin:$PATH"
 
 runcoretests() {
-    "$my_dir"/lssys.sh
+    bash "$my_dir"/lssys.sh
     printf '\n'
 
     runtestsatroot "$my_dir/core"
