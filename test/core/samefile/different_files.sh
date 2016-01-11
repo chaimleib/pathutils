@@ -1,1 +1,1 @@
-! samefile "$0" "$(dirname "$0")"
+! samefile "$0" "`dirname "$0"`"
