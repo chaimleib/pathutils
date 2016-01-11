@@ -5,7 +5,7 @@ my_dir="$(dirname $0)"
 PATH="$my_dir/../bin:$PATH"
 
 runlibtests() {
-    lssys
+    "$my_dir"/lssys.sh
     printf '\n'
 
     echo "# Lib tests... "

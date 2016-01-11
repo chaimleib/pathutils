@@ -1,4 +1,5 @@
 #/bin/bash
+# need bash to use $OSTYPE
 
 # Shows the machine type and OS.
 
@@ -253,4 +254,4 @@ function lssys() {
     [[ -n "$cpu_info" ]]        && printf "This machine:${machine_info}\n"
 }
 
-
+lssys

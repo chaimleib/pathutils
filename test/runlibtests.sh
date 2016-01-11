@@ -4,7 +4,7 @@ my_dir="$(dirname $0)"
 . "$my_dir"/../lib/lib.sh
 
 runlibtests() {
-    lssys
+    "$my_dir"/lssys.sh
     printf '\n'
 
     runtestsatroot "$my_dir/lib"
