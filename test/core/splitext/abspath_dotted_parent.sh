@@ -1,7 +1,6 @@
-while IFS= read -r; do
-    lines+=("$REPLY")
-done < <(splitext /hello.test/world.txt)
-head="${lines[0]}"
-tail="${lines[1]}"
+result="`splitext /hello.test/world.txt`"
+head="`echo "$result" | head -n1`"
+tail="`echo "$result" | tail -n1`"
 
-[[ "$head" == "/hello.test/world" && "$tail" == ".txt" ]]
+[ "$head" = "/hello.test/world" ] &&
+    [ "$tail" = ".txt" ]
