@@ -1,2 +1,2 @@
-result="$(expanduser '/')"
-[[ "$result" == "/" ]]
+result="`expanduser '/'`"
+[ "$result" = "/" ]

@@ -1,4 +1,4 @@
-result="$(expanduser '~/hello/world')"
+result="`expanduser '~/hello/world'`"
 home=~
-[[ "$result" == "${home}/hello/world" ]] &&
-	[[ "$result" != "~/hello/world" ]]
+[ "$result" = "${home}/hello/world" ] &&
+	[ "$result" != "~/hello/world" ]

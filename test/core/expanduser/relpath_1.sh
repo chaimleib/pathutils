@@ -1,2 +1,2 @@
-result="$(expanduser 'helloworld')"
-[[ "$result" == "helloworld" ]]
+result="`expanduser 'helloworld'`"
+[ "$result" = "helloworld" ]

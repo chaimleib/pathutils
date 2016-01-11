@@ -1,3 +1,3 @@
-result="$(expanduser "~${USER}")"
-[[ "$result" == ~ ]] &&
-	[[ "$result" != "~" ]]
+result="`expanduser "~${USER}"`"
+[ "$result" = ~ ] &&
+	[ "$result" != "~" ]
