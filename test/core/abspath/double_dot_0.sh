@@ -1,2 +1,3 @@
-result="$(abspath ../)"
-[[ "$result" == "$(dirname "$PWD")" && "$result" == /* ]]
+result="`abspath ../`"
+[ "$result" = "`dirname "$PWD"`" ] &&
+    [ "`echo "$result" | head -c1`" = / ]

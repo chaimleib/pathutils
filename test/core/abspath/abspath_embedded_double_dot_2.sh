@@ -1,2 +1,2 @@
-result="$(abspath /hello/../world)"
-[[ "$result" == "/world" ]]
+result="`abspath /hello/../world`"
+[ "$result" = "/world" ]
