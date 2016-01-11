@@ -7,7 +7,7 @@ runcoretests() {
     lssys
     printf '\n'
 
-    runtestsatroot "$my_dir"
+    runtestsatroot "$my_dir/core"
     finishtests
 }
 

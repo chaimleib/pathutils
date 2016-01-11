@@ -13,7 +13,7 @@ runlibtests() {
 
     printf '\n'
     echo "# Core tests..."
-    runtestsatroot "$my_dir"
+    runtestsatroot "$my_dir/core"
 
     finishtests
 }
