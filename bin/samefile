@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 # compare each of the following (format letters for darwin/gnu in first column):
 # p/f   mode
@@ -13,10 +13,11 @@
 # a/X   access time
 # m/Y   modified time
 # c/Z   creation time
-case "$OSTYPE" in
-    darwin*) statopts='-f %p:%i:%r:%d:%l:%u:%g:%z:%b:%a:%m:%c:%B' ;;
-    # linux*) statopts='--format %f:%i:%t,%T:%d:%l:%u:%g:%s:%b:%X:%Y:%Z' ;;
-    # cygwin*) statopts='--format %f:%i:%t,%T:%d:%l:%u:%g:%s:%b:%X:%Y:%Z' ;;
-    *) statopts='--format %f:%i:%t,%T:%d:%l:%u:%g:%s:%b:%X:%Y:%Z' ;;
-esac
-test "$(stat $statopts "$1")" == "$(stat $statopts "$2")"
+if stat --help 2>/dev/null | grep GNU >/dev/null; then
+    # using GNU coreutils
+    statopts='--format %f:%i:%t,%T:%d:%l:%u:%g:%s:%b:%X:%Y:%Z'
+else
+    # darwin
+    statopts='-f %p:%i:%r:%d:%l:%u:%g:%z:%b:%a:%m:%c:%B'
+fi
+[ "`stat $statopts "$1"`" = "`stat $statopts "$2"`" ]

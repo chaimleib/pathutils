@@ -1,11 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 # same inode, same device
-case "$OSTYPE" in
-    darwin*) statopts='-f%i:%d' ;;
-    # linux*) statopts='--format %i:%d' ;;
-    # cygwin*) statopts='--format %i:%d' ;;
-    *) statopts='--format %i:%d' ;;
-esac
+if stat --help 2>/dev/null | grep GNU >/dev/null; then
+    # using GNU coreutils
+    statopts='--format %i:%d'
+else
+    # darwin
+    statopts='-f%i:%d'
+fi
 
-test "$(stat $statopts "$1")" == "$(stat $statopts "$2")"
+[ "`stat $statopts "$1"`" = "`stat $statopts "$2"`" ]
