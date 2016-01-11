@@ -1,7 +1,6 @@
-while IFS= read -r; do
-    lines+=("$REPLY")
-done < <(splitpath test/hello\ world)
-head="${lines[0]}"
-tail="${lines[1]}"
+result="`splitext test/hello\ world`"
+head="`echo "$result" | head -n1`"
+tail="`echo "$result" | tail -n1`"
 
-[[ "$head" == "test" && "$tail" == "hello world" ]]
+[ "$head" = "test" ] &&
+    [ "$tail" = "hello world" ]
