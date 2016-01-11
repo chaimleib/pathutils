@@ -3,4 +3,4 @@ os:
   - linux
   - osx
 script:
-    test/runcoretests.sh
+    test/runlibtests.sh && test/runcoretests.sh

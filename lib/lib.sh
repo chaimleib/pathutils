@@ -7,7 +7,7 @@ startswith() {
 }
 
 joinstr() {
-    local sep="`shift`"
+    local sep="$1"; shift
     local num_args=$#
     [ $num_args -eq 0 ] && printf '\n' && return 0
     local i=1
@@ -21,16 +21,21 @@ joinstr() {
 repeatstr() {
     local str="$1"
     local num=${2-0}
-    while ((num--)); do printf "$str"; done
-    printf '\n'
+    rv=''
+    while [ $num -gt 0 ]; do
+        rv="$rv$str"
+        num=$((num-1))
+    done
+    printf "$rv\n"
 }
 
 splitstr() {
-    local str="$1"
-    local delim="$2"
-    if [ -z "$delim" ]; then
-        echo "splitstr: no delimiter provided" >&2
-        return 1
-    fi
-    echo "${str//"$delim"/$'\n'}"
+    rest="$1"
+    delim="${2?splitstr: no delimiter provided}"
+    while [ -n "$rest" ]; do
+        cur="${rest%%$delim*}"
+        printf "$cur\n"
+        rest="${rest#$cur}"
+        rest="${rest#$delim}"
+    done
 }
