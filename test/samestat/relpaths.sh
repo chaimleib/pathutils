@@ -1,1 +1,1 @@
-samestat "$0" "$(dirname "$0")/../samestat/$(basename "$0")"
+samestat "$0" "$(dirname "$0")/$(basename "$0")"
