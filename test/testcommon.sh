@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+# This file is meant to be sourced rather than run standalone.
 
 failed=0
 skipped=0
